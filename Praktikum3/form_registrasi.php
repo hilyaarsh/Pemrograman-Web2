@@ -12,7 +12,6 @@
 <body>
     <div class="container">
         <h2>Form Registrasi IT Club GDSC</h2>
-
         <form method="POST">
         <div class="form-group row">
             <label for="nim" class="col-4 col-form-label">NIM</label> 
@@ -74,8 +73,8 @@
                 <label for="<?= $key; ?>" class="custom-control-label"><?= $key; ?></label>
             </div>
             <?php } ?>
-            </div>
-        </div> 
+        </div>
+    </div> 
         <div class="form-group row">
             <div class="offset-4 col-8">
             <button name="submit" type="submit" class="btn btn-primary">Submit</button>
@@ -91,6 +90,8 @@
                     <th>domisili</th>
                     <th>program studi</th>
                     <th>skill programming</th>
+                    <th>skor</th>
+                    <th>predikat</th>
             </tr>
             <?php 
                 if(isset($_POST['submit'])){
@@ -112,7 +113,41 @@
                     <td>
                         <?php foreach($skills as $skill){
                         echo $skill . " ";  // spasi = . " "
+
+                        $skor = 0;
+                        foreach($skills as $skill){
+
+                            if($skill == "HTML"){
+                                $skor = $skor + 10;
+                            } elseif($skill == "CSS"){
+                                $skor = $skor + 10;
+                            } elseif($skill == "Javascript"){
+                                $skor = $skor + 20;
+                            } elseif($skill == "RWD Boostrap"){
+                                $skor = $skor + 20;
+                            } elseif($skill == "PHP"){
+                                $skor = $skor + 30;
+                            } elseif($skill == "Python"){
+                                $skor = $skor + 30;
+                            } elseif($skill == "Java"){
+                                $skor = $skor + 50;
+                            }
+                        }
+                       
+                        if($skor == 0){
+                            $predikat = "Tidak Memadai";
+                        } elseif($skor <= 40){
+                            $predikat = "Kurang";
+                        } elseif($skor <= 60){
+                            $predikat = "Cukup";
+                        } elseif($skor <= 100){
+                            $predikat = "Baik";
+                        } elseif ($skor <= 170){
+                            $predikat = "Sangat Baik";
+                        }
                     } ?></td>
+                    <td><?= $skor; ?></td>
+                    <td><?= $predikat; ?></td>
                 </tr>
             <?php } ?>
         </table>
